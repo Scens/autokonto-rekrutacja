@@ -1,1 +1,6 @@
-<p>username works!</p>
+<label for="name">Wprowadź imię: </label>
+
+<input type="text" [formControl]=editName/>
+<label *ngIf="editName.invalid">Imię musi być długości 1-8 znaków. </label>
+
+<button [disabled]="editName.invalid" (click)="saveName()">Zapisz</button>

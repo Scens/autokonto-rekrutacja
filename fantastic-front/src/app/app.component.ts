@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'fantastic-front';
+  displayName = '';
+
+  constructor(
+    private userSrv: UserService
+  ) { 
+    this.userSrv.usernameValue.subscribe((nextValue) => {
+      this.displayName = nextValue ? nextValue : '';
+    }) //change the displayed name after every succesful 'login' attempt
+  }
 }

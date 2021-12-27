@@ -12,7 +12,6 @@ import javax.validation.constraints.Size;
 public class User implements Serializable {
     @Id
     @GeneratedValue
-
     private Long id;
 
     @NotBlank

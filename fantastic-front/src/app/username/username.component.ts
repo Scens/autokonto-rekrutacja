@@ -8,19 +8,15 @@ import { UserService } from '../user.service';
   templateUrl: './username.component.html',
   styleUrls: ['./username.component.scss']
 })
-export class UsernameComponent implements OnInit {
-  editName = new FormControl('');
+export class UsernameComponent {
+  editName = new FormControl('', [
+    Validators.required,
+    Validators.maxLength(8)
+  ]);
 
   constructor(
     private userSrv: UserService
   ) { }
-
-  ngOnInit(): void {
-    this.editName.setValidators([
-      Validators.required,
-      Validators.maxLength(8)
-    ]);
-  }
 
   saveName() {
     this.userSrv.username = this.editName.value; //tells UserService to change the displayed name

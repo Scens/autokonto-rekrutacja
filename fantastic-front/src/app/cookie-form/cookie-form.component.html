@@ -1,0 +1,27 @@
+<h2>Ciastka</h2>
+<form [formGroup]="addForm" (ngSubmit)="onAddCookie()"> 
+    <div class="form-group">
+        <label for="name">Nazwa ciastka: </label>
+        <input type="text" formControlName="name" id="name" required>
+    </div>
+    <div class="form-group">
+        <label for="quantity">Liczba ciastek: </label>
+        <input type="number" formControlName="quantity" id="quantity" required>
+    </div>
+    <div class="form-group">
+        <label for="bakingDate">Przewidywana data upieczenia: </label>
+        <input type="date" formControlName="bakingDate" id="bakingDate" required>
+    </div>
+    <div class="form-group">
+        <label for="veganFriendly">Odpowiednie dla wegan: </label>
+        <input type="checkbox" formControlName="veganFriendly" id="veganFriendly">
+    </div>
+    <div class="form-group">
+        <label for="file">Zdjęcie</label>
+        <input type="file" class="form-control" id="file" formControlName="file" (change)="onImageChange($event)">
+    </div>
+    <div class="preview" *ngIf="imgSrc">
+        <img [src]="imgSrc" style="width:400px; height:250px">
+    </div>
+    <button [disabled]="addForm.invalid" type="submit">Dodaj ciastka</button>
+</form>

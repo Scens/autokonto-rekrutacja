@@ -4,7 +4,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { User } from './user';
 import { environment } from '../environments/environment';
 import { Router } from '@angular/router';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -16,13 +15,30 @@ import { Router } from '@angular/router';
  */
 export class UserService {
   private apiServerUrl = environment.apiBaseUrl;
+  public usernameValue = new BehaviorSubject(this.username);
 
   constructor(
     private http: HttpClient,
     private router: Router
   ) { }
 
-  usernameValue = new BehaviorSubject(this.username);
+  set username(value) {
+    if (value)
+      localStorage.setItem('username', value);
+  }
+
+  get username() {
+    return localStorage.getItem('username');
+  }
+
+  set currentUser(user: User) {
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
+  get currentUser() {
+    let json = localStorage.getItem('currentUser');
+    return json ? JSON.parse(json) : null;
+  }
 
   /**
    * Adds user to database, changes the displayed name
@@ -30,8 +46,9 @@ export class UserService {
    */
   public loginUser(user: User): void {
     this.addUser(user).subscribe(
-      () => {
-        this.usernameValue.next(user.name);
+      (addedUser) => {
+        this.usernameValue.next(addedUser.name);
+        this.currentUser = addedUser;
         this.router.navigateByUrl('/user-info');
       },
       (error: HttpErrorResponse) => {
@@ -45,15 +62,6 @@ export class UserService {
   }
 
   public getCurrentUser(): Observable<User> {
-    return this.http.get<User>(`${this.apiServerUrl}/user/find/${localStorage.getItem('username')}`);
-  }
-
-  set username(value) {
-    if (value)
-      localStorage.setItem('username', value);
-  }
-
-  get username() {
-    return localStorage.getItem('username');
+    return this.http.get<User>(`${this.apiServerUrl}/user/find/${this.username}`);
   }
 }

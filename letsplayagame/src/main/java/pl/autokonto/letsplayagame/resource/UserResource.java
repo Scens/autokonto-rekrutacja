@@ -30,7 +30,6 @@ public class UserResource {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(user, HttpStatus.PRECONDITION_FAILED);
         }
-        System.out.println(user.getName());
         User newUser = userService.addUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { User } from '../user';
 import { UserService } from '../user.service';
 
 @Component({
@@ -12,20 +12,22 @@ export class UsernameComponent implements OnInit {
   editName = new FormControl('');
 
   constructor(
-    private router: Router,
     private userSrv: UserService
   ) { }
 
   ngOnInit(): void {
     this.editName.setValidators([
       Validators.required,
-      Validators.minLength(1),
       Validators.maxLength(8)
     ]);
   }
 
   saveName() {
-    this.userSrv.username = this.editName.value; //tell UserService to change the displayed name
-    this.router.navigateByUrl('/user-info');
+    this.userSrv.username = this.editName.value; //tells UserService to change the displayed name
+    let user: User = {
+      name: this.editName.value,
+      visits: 1,
+    }
+    this.userSrv.loginUser(user);
   }
 }

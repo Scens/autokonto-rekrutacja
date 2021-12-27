@@ -15,6 +15,6 @@ export class AppComponent {
   ) { 
     this.userSrv.usernameValue.subscribe((nextValue) => {
       this.displayName = nextValue ? nextValue : '';
-    }) //change the displayed name after every succesful 'login' attempt
+    }) //changes the displayed name after every succesful 'login' attempt
   }
 }

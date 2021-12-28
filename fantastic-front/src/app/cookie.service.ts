@@ -15,4 +15,8 @@ export class CookieService {
   public addCookie(cookie: Cookie): Observable<Cookie> {
     return this.http.post<Cookie>(`${this.apiServerUrl}/cookie/add`, cookie);
   }
+
+  public getCookiesByUserId(userId: number): Observable<Cookie[]> {
+    return this.http.get<Cookie[]>(`${this.apiServerUrl}/cookie/find/${userId}`);
+  }
 }

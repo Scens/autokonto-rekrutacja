@@ -3,10 +3,29 @@
     <div class="form-group">
         <label for="name">Nazwa ciastka: </label>
         <input type="text" formControlName="name" id="name" required>
+        <div *ngIf="addForm.controls['name'].invalid && (addForm.controls['name'].dirty || addForm.controls['name'].touched)" class="alert">
+            <div *ngIf="addForm.controls['name'].errors?.required">
+                Proszę wpisać imię
+            </div>
+            <div *ngIf="addForm.controls['name'].errors?.pattern">
+                Imię może się składać tylko z liter i liczb
+            </div>
+        </div>
     </div>
     <div class="form-group">
         <label for="quantity">Liczba ciastek: </label>
         <input type="number" formControlName="quantity" id="quantity" required>
+        <div *ngIf="addForm.controls['quantity'].invalid && (addForm.controls['quantity'].dirty || addForm.controls['quantity'].touched)" class="alert">
+            <div *ngIf="addForm.controls['quantity'].errors?.required">
+                Proszę wpisać liczbę ciastek
+            </div>
+            <div *ngIf="addForm.controls['quantity'].errors?.min">
+                Ciastek nie może być mniej niż 1
+            </div>
+            <div *ngIf="addForm.controls['quantity'].errors?.max">
+                Ciastek nie może być mniej więcej niż 18
+            </div>
+        </div>
     </div>
     <div class="form-group">
         <label for="bakingDate">Przewidywana data upieczenia: </label>
@@ -23,5 +42,5 @@
     <div class="preview" *ngIf="imgSrc">
         <img [src]="imgSrc" style="width:400px; height:250px">
     </div>
-    <button [disabled]="addForm.invalid" type="submit">Dodaj ciastka</button>
+    <button [disabled]="addForm.invalid" type="submit">Dodaj ciastko</button>
 </form>

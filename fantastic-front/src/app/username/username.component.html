@@ -1,6 +1,14 @@
-<label for="name">Wprowadź imię: </label>
+<label for="editName">Wprowadź imię: </label>
 
-<input type="text" [formControl]=editName/>
-<label *ngIf="editName.invalid"> Imię musi być długości 1-8 znaków. </label>
-
-<button [disabled]="editName.invalid" (click)="saveName()">Zapisz</button>
+<form [formGroup]="loginForm"> 
+    <input type="text" formControlName="name" id="name" required/>
+    <div *ngIf="loginForm.controls['name'].invalid && (loginForm.controls['name'].dirty || loginForm.controls['name'].touched)" class="alert">
+        <div *ngIf="loginForm.controls['name'].errors?.required">
+            Proszę wpisać imię
+        </div>
+        <div *ngIf="loginForm.controls['name'].errors?.maxlength">
+            Imię nie może byc dłuższe niz 8 znaków
+        </div>
+    </div>
+    <button [disabled]="loginForm.invalid" (click)="login()">Zaloguj</button>
+</form>

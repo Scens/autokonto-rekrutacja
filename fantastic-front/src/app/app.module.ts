@@ -8,13 +8,15 @@ import { UsernameComponent } from './username/username.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieFormComponent } from './cookie-form/cookie-form.component';
+import { AllUsersCookiesComponent } from './all-users-cookies/all-users-cookies.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsernameComponent,
     UserInfoComponent,
-    CookieFormComponent
+    CookieFormComponent,
+    AllUsersCookiesComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { User } from './user';
 import { environment } from '../environments/environment';
 import { Router } from '@angular/router';
+import { Cookie } from './cookie';
 @Injectable({
   providedIn: 'root'
 })
@@ -63,5 +64,13 @@ export class UserService {
 
   public getCurrentUser(): Observable<User> {
     return this.http.get<User>(`${this.apiServerUrl}/user/find/${this.username}`);
+  }
+
+  public getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiServerUrl}/user/all`);
+  }
+
+  public getAllInfo(): Observable<Map<User, Cookie[]>> {
+    return this.http.get<Map<User, Cookie[]>>(`${this.apiServerUrl}/user/all-info`);
   }
 }

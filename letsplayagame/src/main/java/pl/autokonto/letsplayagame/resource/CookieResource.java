@@ -1,10 +1,14 @@
 package pl.autokonto.letsplayagame.resource;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,5 +33,11 @@ public class CookieResource {
         }
         Cookie newCookie = cookieService.addCookie(cookie);
         return new ResponseEntity<>(newCookie, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/find/{userId}")
+    public ResponseEntity<List<Cookie>> getCookieByUserId(@PathVariable("userId") Long userId) {
+        List<Cookie> cookies = cookieService.findCookieByUserId(userId);
+        return new ResponseEntity<>(cookies, HttpStatus.OK);
     }
 }

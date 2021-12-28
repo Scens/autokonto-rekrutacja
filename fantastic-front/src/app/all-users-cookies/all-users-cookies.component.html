@@ -1,0 +1,26 @@
+<ul class="users">
+  <div *ngFor="let user of users" >
+    <h3>Użytkownik: {{ user.name }}</h3>
+    <div *ngFor="let cookie of map.get(user)" >
+        <div>
+            <label for="name">Nazwa ciastka: {{ cookie.name }} </label>
+        </div>
+        <div>
+            <label for="quantity">Liczba ciastek: {{ cookie.quantity }}</label>
+        </div>
+        <div>
+            <label for="bakingDate">Przewidywana data upieczenia: {{ cookie.bakingDate }}</label>
+        </div>
+        <div>
+            <label for="veganFriendly">Odpowiednie dla wegan: {{ cookie.veganFriendly }}</label>
+        </div>
+        <div>
+            <label for="file">Zdjęcie</label>
+        </div>
+        <div class="preview" *ngIf="cookie.imgSrc">
+            <img [src]="cookie.imgSrc" style="width:400px; height:250px">
+        </div>
+        <br>
+    </div>
+  </div>
+</ul>

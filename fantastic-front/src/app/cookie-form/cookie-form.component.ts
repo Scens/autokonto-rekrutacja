@@ -39,14 +39,14 @@ export class CookieFormComponent implements OnInit {
   }
 
   public onAddCookie(): void {
-    const today = new Date();
-    alert(today.getDay + ' ' + today.toString)
     if (this.userSrv.currentUser.id) {
       let cookie: Cookie = this.addForm.value;
       cookie.userId = this.userSrv.currentUser.id;
       cookie.imgSrc = this.imgSrc;
       this.cookieSrv.addCookie(cookie).subscribe(
-        () => { },
+        () => { 
+          window.location.reload();
+        },
         (err: HttpErrorResponse) => {
           alert(err.message);
         }

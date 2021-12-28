@@ -1,4 +1,0 @@
-- walidacja daty (frontend i api)
-- limit dodanych ciastek na użytkownika = 5
-- obsługa błędów
-- przy nieudanej walidacji frontend wyświetlić warunki walidacji
